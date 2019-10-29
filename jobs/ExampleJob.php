@@ -1,5 +1,5 @@
 <?php
-namespace Theme\Jobs;
+namespace Bedrock\Jobs;
 use WPKit\Queue\AbstractJob;
 class ExampleJob extends AbstractJob
 {

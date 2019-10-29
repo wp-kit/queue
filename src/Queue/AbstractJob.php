@@ -1,8 +1,6 @@
 <?php
 namespace WPKit\Queue;
 use Bernard\Message;
-use WPKit\Queue\Queue;
-use WPKit\Foundation\Application;
 abstract class AbstractJob implements Message
 {  
 	protected $queue;
