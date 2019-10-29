@@ -1,7 +1,8 @@
 <?php
 namespace Theme\Jobs\Handlers;
 use Theme\Jobs\ExampleJob;
-class ExampleJobHandler
+use WPKit\Queue\AbstractHandler;
+class ExampleJobHandler extends AbstractHandler
 {
 	
 	public function handle(ExampleJob $message)
