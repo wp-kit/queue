@@ -25,13 +25,13 @@ return [
 
 ## How To Use
 
-Make sure you have Redis installed on the server with default setup.
+Make sure you have [Redis](https://redis.io/) installed on the server with default setup.
 
 Examples of how what a Job file should look like can be found in the [jobs folder](jobs). 
 
 Add these to you `bedrock/root/jobs` directory manually.
 
-Make sure you are running the queue in a shell window, or via Supervisor:
+Make sure you are running the queue in a shell window, or via [Supervisor](http://supervisord.org/):
 
 ```
 vendor/bin/bedrock-queue-worker
