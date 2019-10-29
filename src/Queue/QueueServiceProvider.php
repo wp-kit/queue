@@ -1,6 +1,6 @@
 <?php
 
-namespace WPKit\Queue\Providers;
+namespace WPKit\Queue;
 
 use Illuminate\Support\ServiceProvider;
 use WPKit\Queue\Queue;
