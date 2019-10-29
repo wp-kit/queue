@@ -1,0 +1,17 @@
+{
+    "name": "wpkit/queue",
+    "description": "A simple queue system for WPKit",
+    "authors": [
+        {
+            "name": "terence1990",
+            "email": "terence@creativelittledots.co.uk"
+        }
+    ],
+    "require": {
+	    "bernard/bernard":"1.0.0-alpha6",
+		"psr/container": "1.0.*",
+		"symfony/property-access": "^3.3",
+		"predis/predis": "^1.1",
+		"zendframework/zend-servicemanager": "^3.3"
+    }
+}
