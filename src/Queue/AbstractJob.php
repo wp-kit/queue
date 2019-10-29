@@ -1,7 +1,7 @@
 <?php
 namespace WPKit\Queue;
 use Bernard\Message;
-abstract class AbstractMessage implements Message
+abstract class AbstractJob implements Message
 {  
 	
 
