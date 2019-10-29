@@ -13,6 +13,7 @@ define('WP_CONSOLE', true);
 define('ROOT_DIR', getcwd());
 putenv('WP_ENV=development');
 require_once 'vendor/autoload.php';
+require_once 'config/application.php';
 
 $queue = new Queue();
 
@@ -20,7 +21,6 @@ $queueFactory = $queue->getFactory();
 
 $router = new ClassNameRouter();
 $router->add(AbstractJob::class, function(AbstractJob $job) use($queue) {
-    $job->wp();
     $job->setQueue($queue);
     $job->handle();
 });

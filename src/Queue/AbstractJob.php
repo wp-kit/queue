@@ -2,6 +2,7 @@
 namespace WPKit\Queue;
 use Bernard\Message;
 use WPKit\Queue\Queue;
+use WPKit\Foundation\Application;
 abstract class AbstractJob implements Message
 {  
 	protected $queue;
@@ -24,15 +25,26 @@ abstract class AbstractJob implements Message
 	
 	public static function dispatch() {
 		$job = new static(...func_get_args());
-		app('queue')->dispatch($job);
+		$job->setQueue(app('queue'));
+		$job->getQueue()->dispatch($job);
 	}
 	
-	public function setQueue(Queue $queue) {
+	public static function trigger() {
+		$job = new static(...func_get_args());
+		$job->setQueue(app('queue'));
+		$job->handle();
+	}
+	
+	public function setQueue($queue) {
 		$this->queue = $queue;
 	}
 	
+	public function getQueue() {
+		return $this->queue;
+	}
+	
 	public function log($message) {
-		$this->queue->log($message);
+		$this->getQueue()->log($message);
 	}
 
 }
