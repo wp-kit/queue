@@ -1,5 +1,5 @@
 <?php
-namespace Theme\Jobs;
+namespace Bedrock\Jobs;
 use WPKit\Queue\AbstractJob;
 class ExampleJob extends AbstractJob
 {
@@ -10,8 +10,13 @@ class ExampleJob extends AbstractJob
 		$this->foo = $foo;
 	}
 	
-	public function getDoo() {
+	public function getFoo() {
 		return $this->foo;
+	}
+	
+	public function handle()
+	{	
+		echo $this->getFoo();
 	}
   
 }

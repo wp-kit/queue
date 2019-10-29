@@ -3,48 +3,44 @@
 use Bernard\Router\ClassNameRouter;
 use Bernard\Consumer;
 use Bernard\Queue\RoundRobinQueue;
-use Bernard\Message;
+use WPKit\Queue\AbstractJob;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use WPKit\Queue\Queue;
 use Roots\WPConfig\Config;
 
 /** WordPress view bootstrapper */
 define('WP_CONSOLE', true);
-define('WP_ENV', 'console');
-require_once dirname(__DIR__) . '/config/application.php';
+define('ROOT_DIR', getcwd());
+putenv('WP_ENV=development');
+require_once 'vendor/autoload.php';
 
 $queue = new Queue();
 
 $queueFactory = $queue->getFactory();
 
 $router = new ClassNameRouter();
-$router->add(Message::class, function(Message $message) {
-    $handlerClass = $message->getHanderClass();
-    $handler = new $handlerClass;
-    $handler->handle($message);
+$router->add(AbstractJob::class, function(AbstractJob $job) use($queue) {
+    $job->wp();
+    $job->setQueue($queue);
+    $job->handle();
 });
-$queues = array_map(
-    function ($queueName) use ($queueFactory) {
-      return $queueFactory->create($queueName);
-    },
-    explode(',', Config::get('QUEUES'))
-);
+$queues = [$queueFactory->create('default')];
 $eventDispatcher = new EventDispatcher();
 $eventDispatcher->addListener(
     Bernard\BernardEvents::INVOKE,
-    function(Bernard\Event\EnvelopeEvent $envelopeEvent) {
+    function(Bernard\Event\EnvelopeEvent $envelopeEvent) use($queue) {
         $queue->log('Processing: ' . $envelopeEvent->getEnvelope()->getClass()); 
     }
 );
 $eventDispatcher->addListener(
     Bernard\BernardEvents::ACKNOWLEDGE,
-    function(Bernard\Event\EnvelopeEvent $envelopeEvent) {
+    function(Bernard\Event\EnvelopeEvent $envelopeEvent) use($queue) {
         $queue->log('Processed: ' . $envelopeEvent->getEnvelope()->getClass());
     }
 );
 $eventDispatcher->addListener(
     Bernard\BernardEvents::REJECT,
-    function(Bernard\Event\RejectEnvelopeEvent $envelopeEvent) {
+    function(Bernard\Event\RejectEnvelopeEvent $envelopeEvent) use($queue) {
         $queue->log('Failed: ' . $envelopeEvent->getEnvelope()->getClass());
     }
 );

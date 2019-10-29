@@ -16,7 +16,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class Queue {
 	
-	private $factory;
+	protected $factory;
 	
 	public function getFactory() {
 		
