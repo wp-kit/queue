@@ -23,33 +23,34 @@ return [
 ];
 ```
 
-### Add Config File
-
-The recommended method of installing config files for ```wp-kit``` components is via ```wp kit vendor:publish``` command.
-
-First, [install WP CLI](http://wp-cli.org/), and then install this component, ```wp kit vendor:publish``` will automatically be installed with ```wp-kit/utils```, once installed you can run:
-
-```wp kit vendor:publish```
-
-For more information, please visit [```wp-kit/utils```](https://github.com/wp-kit/utils#commands).
-
-Alternatively, you can place the [config file(s)](config) in your ```theme/resources/config``` directory manually.
-
-### Update Composer Paths
-
-```php
-//inside theme/resources/config/loading.config.php
-
-return [
-	...,
-    'Theme\\Jobs\\' => resources_path('jobs'),
-    'Theme\\Jobs\\Handlers\\' => resources_path('jobs/handlers')
-];
-```
-
 ## How To Use
 
-Examples of how to use can be found in the [jobs folder](jobs). Add these to you ```theme/resources/jobs``` directory manually.
+Make sure you have [Redis](https://redis.io/) installed on the server with default setup.
+
+Examples of how what a Job file should look like can be found in the [jobs folder](jobs). 
+
+Add these to you `bedrock/root/jobs` directory manually.
+
+Make sure you are running the queue in a shell window, or via [Supervisor](http://supervisord.org/):
+
+```
+vendor/bin/bedrock-queue-worker
+```
+
+You can then dispatch jobs within your wp-kit code as follows:
+
+```php
+ExampleJob::dispatch('bar');
+```
+
+You should then see the string `bar` echo'd in the shell window.
+
+Also, in `bedrock/root/logs` folder there will be a queue file, you could open it or `tail` it and see the following:
+
+```
+2019-10-29 15:34:40 Processing: Bedrock\Jobs\ExampleJob
+2019-10-29 15:34:42 Processed: Bedrock\Jobs\ExampleJob
+```
 
 ## Get Involved
 
@@ -72,6 +73,8 @@ For details about contributing to the framework, please check the [contribution 
 Wordpress 4+
 
 PHP 5.6+
+
+Redis
 
 ## License
 
