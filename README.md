@@ -25,6 +25,8 @@ return [
 
 ## How To Use
 
+Make sure you have Redis installed on the server with default setup.
+
 Examples of how what a Job file should look like can be found in the [jobs folder](jobs). 
 
 Add these to you `bedrock/root/jobs` directory manually.
@@ -71,6 +73,8 @@ For details about contributing to the framework, please check the [contribution 
 Wordpress 4+
 
 PHP 5.6+
+
+Redis
 
 ## License
 
