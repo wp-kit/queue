@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 use Bernard\Router\ClassNameRouter;
 use Bernard\Consumer;
