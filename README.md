@@ -25,11 +25,15 @@ return [
 
 ## How To Use
 
-Examples of how what a Job file should look like can be found in the [jobs folder](jobs). Add these to you `bedrock/root/jobs` directory manually.
+Examples of how what a Job file should look like can be found in the [jobs folder](jobs). 
+
+Add these to you `bedrock/root/jobs` directory manually.
 
 Make sure you are running the queue in a shell window, or via Supervisor:
 
-`vendor/bin/bedrock-queue-worker`
+```
+vendor/bin/bedrock-queue-worker
+```
 
 You can then dispatch jobs within your wp-kit code as follows:
 
