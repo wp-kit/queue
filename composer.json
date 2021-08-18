@@ -11,7 +11,7 @@
 		"bin/bedrock-queue-worker"  
     ],
     "require": {
-	    "bernard/bernard":"1.0.0-alpha6",
+	    "wp-kit/bernard":"1.0.0",
 		"psr/container": "1.0.*",
 		"symfony/property-access": "^3.3",
 		"predis/predis": "^1.1",
